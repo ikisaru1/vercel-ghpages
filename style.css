@@ -1,0 +1,47 @@
+body {
+ font-family: "Josefin Sans", sans-serif;
+ font-weight: 400;
+ font-style: normal;
+}
+
+#menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ccc;
+    justify-content: center;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+
+#menu li a:hover {
+    color: #007bff;
+}
+
+.post-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: #fff;
+    transition: box-shadow 0.3s;
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  
+  .post-card a {
+    color: #222;
+    text-decoration: none;
+  }
+  
+  .post-card a:hover {
+    color: #007BFF;
+  }
