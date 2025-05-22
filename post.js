@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleBtn.addEventListener('click', () => {
     if (commentsVisible) {
       commentsContainer.innerHTML = '';
-      toggleBtn.textContent = 'Показать комментарии';
+      toggleBtn.textContent = 'Open comments';
       commentsVisible = false;
     } else {
-      commentsContainer.innerHTML = '<p>Загрузка комментариев...</p>';
+      commentsContainer.innerHTML = '<p>Loading comments...</p>';
       fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
         .then(res => res.json())
         .then(comments => {

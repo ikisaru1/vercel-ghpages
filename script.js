@@ -80,21 +80,78 @@ function loadData() {
     content.innerHTML = '<p>loading...</p>';
   }
   
-  function renderPagination(totalCount) {
-    const totalPages = Math.ceil(totalCount / limit);
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-  
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      btn.disabled = i === currentPage;
-      btn.addEventListener('click', () => {
-        currentPage = i;
-        loadData();
-      });
-      pagination.appendChild(btn);
+function renderPagination(totalCount) {
+  const totalPages = Math.ceil(totalCount / limit);
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = '';
+  pagination.className = 'pagination';
+
+  function createButton(text, page, isActive = false) {
+    const btn = document.createElement('button');
+    btn.textContent = text;
+    btn.className = 'page';
+    if (isActive) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      currentPage = page;
+      loadData();
+    });
+    return btn;
+  }
+
+  // Prev button
+  if (currentPage > 1) {
+    const prev = document.createElement('button');
+    prev.className = 'prev';
+    prev.innerHTML = '‹';
+    prev.addEventListener('click', () => {
+      currentPage--;
+      loadData();
+    });
+    pagination.appendChild(prev);
+  }
+
+  // Main logic
+  let maxPagesToShow = 5;
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+  if (endPage - startPage < maxPagesToShow - 1) {
+    startPage = Math.max(1, endPage - maxPagesToShow + 1);
+  }
+
+  if (startPage > 1) {
+    pagination.appendChild(createButton(1, 1, currentPage === 1));
+    if (startPage > 2) {
+      const dots = document.createElement('span');
+      dots.className = 'dots';
+      dots.textContent = '...';
+      pagination.appendChild(dots);
     }
   }
-  
-  
+
+  for (let i = startPage; i <= endPage; i++) {
+    pagination.appendChild(createButton(i, i, currentPage === i));
+  }
+
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      const dots = document.createElement('span');
+      dots.className = 'dots';
+      dots.textContent = '...';
+      pagination.appendChild(dots);
+    }
+    pagination.appendChild(createButton(totalPages, totalPages, currentPage === totalPages));
+  }
+
+  // Next button
+  if (currentPage < totalPages) {
+    const next = document.createElement('button');
+    next.className = 'next';
+    next.innerHTML = '›';
+    next.addEventListener('click', () => {
+      currentPage++;
+      loadData();
+    });
+    pagination.appendChild(next);
+  }
+}

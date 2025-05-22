@@ -45,3 +45,40 @@ body {
   .post-card a:hover {
     color: #007BFF;
   }
+  
+  .pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: sans-serif;
+  margin-top: 20px;
+}
+
+.page,
+.next {
+  background-color: #f0f4ff;
+  color: #2c6ed5;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.page:hover,
+.next:hover {
+  background-color: #d9e6ff;
+}
+
+.page.active {
+  background-color: #2c6ed5;
+  color: white;
+  font-weight: bold;
+}
+
+.dots {
+  padding: 0 6px;
+  color: #888;
+}
+
